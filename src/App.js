@@ -28,7 +28,7 @@ function App() {
   return (
     <svg width={width} height={height}>
       {
-        data.map(d => <rect x={0} y={yScale(d.country)} w={xScale(d.population)} h/>)
+        data.map(d => <rect x={0} y={yScale(d.country)} w={xScale(d.population)} h={yScale.bandwidth()}/>)
       }
     </svg>
   );
