@@ -11,7 +11,11 @@ function App() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    d3.csv(csvUrl).then(setData)
+    const row = d => {
+      d.population = parseFloat(d['2020'])
+      return d
+    }
+    d3.csv(csvUrl, row).then(setData)
   }, [])
 
   if (!data) {
