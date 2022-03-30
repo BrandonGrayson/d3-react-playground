@@ -17,10 +17,13 @@ function App() {
   if (!data) {
     return <pre>Loading...</pre>
   }
+
+  const yScale = d3.scaleBand().domain(data.map(data => data.country)).range([0, data.country])
+
   return (
     <svg width={width} height={height}>
       {
-        data.map(d => <rect x={0} y w h/>)
+        data.map(d => <rect x={0} y={yScale(data.country)} w h/>)
       }
     </svg>
   );
