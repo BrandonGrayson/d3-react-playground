@@ -23,11 +23,12 @@ function App() {
   }
 
   const yScale = d3.scaleBand().domain(data.map(data => data.country)).range([0, data.country])
+  const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.population)]).range([0, width])
 
   return (
     <svg width={width} height={height}>
       {
-        data.map(d => <rect x={0} y={yScale(data.country)} w h/>)
+        data.map(d => <rect x={0} y={yScale(d.country)} w={xScale(d.population)} h/>)
       }
     </svg>
   );
