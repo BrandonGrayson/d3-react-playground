@@ -1,5 +1,6 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as d3 from 'd3';
 
 const width = 960
 const height = 500
@@ -9,6 +10,13 @@ const csvUrl = 'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33b
 function App() {
   const [data, setData] = useState(null)
 
+  useEffect(() => {
+    d3.csv(csvUrl).then(setData)
+  }, [])
+
+  if (!data) {
+    return <pre>Loading...</pre>
+  }
   return (
     <div className="App">
       <h1>D3 Playground</h1>
