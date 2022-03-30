@@ -18,9 +18,11 @@ function App() {
     return <pre>Loading...</pre>
   }
   return (
-    <div className="App">
-      <h1>D3 Playground</h1>
-    </div>
+    <svg width={width} height={height}>
+      {
+        data.map(d => <rect x={0} y w h/>)
+      }
+    </svg>
   );
 }
 
