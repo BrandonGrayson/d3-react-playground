@@ -40,11 +40,11 @@ function App() {
 
   const yScale = scaleBand()
     .domain(data.map((d) => d.Country))
-    .range([0, height]);
+    .range([0, innerHeight]);
 
   const xScale = scaleLinear()
     .domain([0, max(data, (d) => d.population)])
-    .range([0, width]);
+    .range([0, innerWidth]);
 
   console.log('yScale', yScale(data.Country))
   console.log('xScale', xScale(data.Population))
@@ -52,6 +52,7 @@ function App() {
   return (
 
     <svg width={width} height={height}>
+      <g transform={`translate(${margin.left}, ${margin.top})`}>
       {
         data.map((d) => (
           <rect
@@ -61,6 +62,8 @@ function App() {
             height={yScale.bandwidth()}
           />
         ))}
+      </g>
+
     </svg>
 
 
