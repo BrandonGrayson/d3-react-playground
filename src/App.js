@@ -9,6 +9,12 @@ const csvUrl =
 
 const width = 960;
 const height = 500;
+const margin = {
+  top: 20,
+  right: 20,
+  left: 20,
+  bottom: 20
+}
 
 function App() {
   const [data, setData] = useState(null);
@@ -28,6 +34,9 @@ function App() {
   }
 
   console.log(data[0]);
+
+  const innerWidth = width - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
 
   const yScale = scaleBand()
     .domain(data.map((d) => d.Country))
