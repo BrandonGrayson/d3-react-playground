@@ -1,36 +1,64 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import * as d3 from 'd3';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
+import { csv, scaleBand, scaleLinear, max } from 'd3';
 
-const width = 960
-const height = 500
+const csvUrl =
+  'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
 
-const csvUrl = 'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv'
+const width = 960;
+const height = 500;
 
 function App() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    const row = d => {
-      d.population = parseFloat(d['2020'])
-      return d
-    }
-    d3.csv(csvUrl, row).then(setData)
-  }, [])
+    const row = (d) => {
+      d.population = +d['2020'];
+      return d;
+    };
+    csv(csvUrl, row).then((data) => {
+      setData(data.slice(0, 10));
+    });
+  }, []);
 
   if (!data) {
-    return <pre>Loading...</pre>
+    return <pre>Loading...</pre>;
   }
 
-  const yScale = d3.scaleBand().domain(data.map(data => data.country)).range([0, data.country])
-  const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.population)]).range([0, width])
+  console.log(data[0]);
+
+  const yScale = scaleBand()
+    .domain(data.map((d) => d.Country))
+    .range([0, height]);
+
+  const xScale = scaleLinear()
+    .domain([0, max(data, (d) => d.population)])
+    .range([0, width]);
+
+  console.log('yScale', yScale(data.Country))
+  console.log('xScale', xScale(data.Population))
 
   return (
+
     <svg width={width} height={height}>
       {
-        data.map(d => <rect x={0} y={yScale(d.country)} w={xScale(d.population)} h={yScale.bandwidth()}/>)
-      }
+        data.map((d) => (
+          <rect
+            key={d.Country}
+            y={yScale(d.Country)}
+            width={xScale(d.population)}
+            height={yScale.bandwidth()}
+          />
+        ))}
     </svg>
+
+
+
+
+
+
   );
 }
 
