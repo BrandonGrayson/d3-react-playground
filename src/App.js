@@ -10,7 +10,7 @@ const csvUrl =
 const width = 960;
 const height = 500;
 const margin = {
-  top: 20,
+  top: 50,
   right: 20,
   left: 20,
   bottom: 20
