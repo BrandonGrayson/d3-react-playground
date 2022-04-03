@@ -10,7 +10,7 @@ const csvUrl =
 const width = 960;
 const height = 500;
 const margin = {
-  top: 50,
+  top: 20,
   right: 20,
   left: 20,
   bottom: 20
@@ -53,6 +53,9 @@ function App() {
 
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
+        {
+          xScale.ticks().map(tickValue => (<line x1={xScale(tickValue)} y1={0} x2={xScale(tickValue)} y2={innerHeight} stroke="black" />))
+        }
       {
         data.map((d) => (
           <rect
