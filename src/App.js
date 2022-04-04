@@ -7,11 +7,11 @@ import { csv, scaleBand, scaleLinear, max } from 'd3';
 const csvUrl =
   'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
 
-const width = 960;
+const width = 1200;
 const height = 500;
 const margin = {
   top: 20,
-  right: 20,
+  right: 40,
   left: 20,
   bottom: 20
 }
@@ -54,26 +54,24 @@ function App() {
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {
-          xScale.ticks().map(tickValue => (<line x1={xScale(tickValue)} y1={0} x2={xScale(tickValue)} y2={innerHeight} stroke="black" />))
+          xScale.ticks().map(tickValue => (
+            <g transform={`translate(${xScale(tickValue)})`}>
+            <line stroke="black" />
+            <text y={innerHeight}>{tickValue}</text>
+            </g>
+          ))
         }
-      {
-        data.map((d) => (
-          <rect
-            key={d.Country}
-            y={yScale(d.Country)}
-            width={xScale(d.population)}
-            height={yScale.bandwidth()}
-          />
-        ))}
+        {
+          data.map((d) => (
+            <rect
+              key={d.Country}
+              y={yScale(d.Country)}
+              width={xScale(d.population)}
+              height={yScale.bandwidth()}
+            />
+          ))}
       </g>
-
     </svg>
-
-
-
-
-
-
   );
 }
 
