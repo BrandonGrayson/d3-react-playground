@@ -55,7 +55,9 @@ function App() {
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {
           xScale.ticks().map(tickValue => (
-            <g transform={`translate(${xScale(tickValue)})`}>
+            <g 
+            transform={`translate(${xScale(tickValue)})`}
+            key={tickValue}>
             <line stroke="black" />
             <text style={{textAnchor: 'middle'}} dy='.71em' y={innerHeight + 3}>{tickValue}</text>
             </g>
