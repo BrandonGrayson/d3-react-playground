@@ -52,7 +52,7 @@ function App() {
   return (
 
     <svg width={width} height={height}>
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
+      <g className='tick' transform={`translate(${margin.left}, ${margin.top})`}>
         {
           xScale.ticks().map(tickValue => (
             <g 
