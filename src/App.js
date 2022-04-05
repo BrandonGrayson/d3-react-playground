@@ -12,7 +12,7 @@ const height = 500;
 const margin = {
   top: 20,
   right: 40,
-  left: 20,
+  left: 200,
   bottom: 20
 }
 
@@ -57,8 +57,15 @@ function App() {
           xScale.ticks().map(tickValue => (
             <g transform={`translate(${xScale(tickValue)})`}>
             <line stroke="black" />
-            <text y={innerHeight}>{tickValue}</text>
+            <text style={{textAnchor: 'middle'}} dy='.71em' y={innerHeight + 3}>{tickValue}</text>
             </g>
+          ))
+        }        
+        {
+          yScale.domain().map(tickValue => (
+      
+            <text style={{textAnchor: 'end'}} x={-3} dy=".32em" y={yScale(tickValue) + yScale.bandwidth() / 2} >{tickValue} </text>
+        
           ))
         }
         {
