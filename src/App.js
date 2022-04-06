@@ -34,8 +34,6 @@ function App() {
     return <pre>Loading...</pre>;
   }
 
-  console.log(data[0]);
-
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
