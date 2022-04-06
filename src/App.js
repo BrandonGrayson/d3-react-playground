@@ -3,6 +3,7 @@ import React, {
   useEffect,
 } from 'react';
 import { csv, scaleBand, scaleLinear, max } from 'd3';
+import PatientTimeline from './PatientTimeline';
 
 const csvUrl =
   'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
@@ -50,37 +51,38 @@ function App() {
   console.log('xScale', xScale(data.Population))
 
   return (
+    <PatientTimeline />
 
-    <svg width={width} height={height}>
-      <g className='tick' transform={`translate(${margin.left}, ${margin.top})`}>
-        {
-          xScale.ticks().map(tickValue => (
-            <g 
-            transform={`translate(${xScale(tickValue)})`}
-            key={tickValue}>
-            <line stroke="black" />
-            <text style={{textAnchor: 'middle'}} dy='.71em' y={innerHeight + 3}>{tickValue}</text>
-            </g>
-          ))
-        }        
-        {
-          yScale.domain().map(tickValue => (
+    // <svg width={width} height={height}>
+    //   <g className='tick' transform={`translate(${margin.left}, ${margin.top})`}>
+    //     {
+    //       xScale.ticks().map(tickValue => (
+    //         <g 
+    //         transform={`translate(${xScale(tickValue)})`}
+    //         key={tickValue}>
+    //         <line stroke="black" />
+    //         <text style={{textAnchor: 'middle'}} dy='.71em' y={innerHeight + 3}>{tickValue}</text>
+    //         </g>
+    //       ))
+    //     }        
+    //     {
+    //       yScale.domain().map(tickValue => (
       
-            <text style={{textAnchor: 'end'}} x={-3} dy=".32em" y={yScale(tickValue) + yScale.bandwidth() / 2} >{tickValue} </text>
+    //         <text style={{textAnchor: 'end'}} x={-3} dy=".32em" y={yScale(tickValue) + yScale.bandwidth() / 2} >{tickValue} </text>
         
-          ))
-        }
-        {
-          data.map((d) => (
-            <rect
-              key={d.Country}
-              y={yScale(d.Country)}
-              width={xScale(d.population)}
-              height={yScale.bandwidth()}
-            />
-          ))}
-      </g>
-    </svg>
+    //       ))
+    //     }
+    //     {
+    //       data.map((d) => (
+    //         <rect
+    //           key={d.Country}
+    //           y={yScale(d.Country)}
+    //           width={xScale(d.population)}
+    //           height={yScale.bandwidth()}
+    //         />
+    //       ))}
+    //   </g>
+    // </svg>
   );
 }
 
