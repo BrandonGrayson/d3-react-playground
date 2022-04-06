@@ -13,7 +13,9 @@ export default function PatientTimeline() {
     return (
         <>
             <svg width={width} height={height}>
-
+                <g>
+                    
+                </g>
             </svg>
         </>
     )
