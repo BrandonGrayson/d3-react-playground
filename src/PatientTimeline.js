@@ -15,6 +15,8 @@ const height = 500
 //     bottom: 20
 // }
 
+const videoData = [25, 30, 45, 60, 20]
+
 export default function PatientTimeline() {
     const [data, setData] = useState(null) 
     const cm = useRef(null)
@@ -23,15 +25,21 @@ export default function PatientTimeline() {
         setData(testData.cm)
 
         const svg = d3.select(cm.current)
-        
+
     }, [])
 
     console.log('data', data)
     return (
         <>
         <h1>Cocomitant Medications</h1>
-            <svg ref={cm} width={width} height={height}>
-            </svg>
+        <svg height="300" width="1000">
+        <rect width="100%" height="100%" fill="grey" />
+        {
+            videoData.map(value => (
+                <circle r={value}></circle>
+            ))
+        }
+        </svg>
         </>
     )
 }

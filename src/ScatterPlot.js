@@ -2,7 +2,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import { csv, scaleBand, scaleLinear, max } from 'd3';
+import { csv, scaleLinear } from 'd3';
 import './App.css'
 
 import { extent } from 'd3';
