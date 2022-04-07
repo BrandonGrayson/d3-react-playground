@@ -21,6 +21,9 @@ export default function PatientTimeline() {
 
     useEffect(() => {
         setData(testData.cm)
+
+        const svg = d3.select(cm.current)
+        
     }, [])
 
     console.log('data', data)
