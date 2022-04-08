@@ -15,9 +15,9 @@ const height = 500
 //     bottom: 20
 // }
 
-const getDate = datestring => {
-    return new Date(datestring)
-}
+// const getDate = datestring => {
+//     return new Date(datestring)
+// }
 
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
@@ -35,16 +35,20 @@ export default function PatientTimeline() {
             svg.select(".x-axis").call(xAxis)
         }
 
+        if ( Array.isArray(data)) {
+            console.log('array value', data[0])
+        }
+
 
 
     }, [data])
 
     console.log('data', data)
 
-    if (!data) {
-        return null
-    }
-    console.log('get Date example', getDate(data.cm[0].rx_start_date))
+    // if (data.length !== 0) {
+    //     console.log('get Date example', data)
+    // }
+    
     return (
         <>
         <h1>Concomitant Medications</h1>
