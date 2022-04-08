@@ -38,7 +38,7 @@ export default function PatientTimeline() {
     console.log('data', data)
     return (
         <>
-        <h1>Cocomitant Medications</h1>
+        <h1>Concomitant Medications</h1>
         <svg ref={cm} height={height} width={width}>
             <rect width="100%" height="100%" fill="grey" />
             <g className='x-axis' />
