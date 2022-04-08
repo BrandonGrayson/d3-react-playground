@@ -283,7 +283,7 @@ const testData = {
         "cm_class": null,
         "cm_class_cd": null,
         "indication": "high blood pressure",
-        "rx start date": "September 30, 2012 03:24:00",
+        "rx_start_date": "September 30, 2012 03:24:00",
         "rx end date": "7/16/18",
         "rx assessment date": "7/16/18",
         "is_ongoing": false,

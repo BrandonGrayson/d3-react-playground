@@ -15,6 +15,10 @@ const height = 500
 //     bottom: 20
 // }
 
+const getDate = datestring => {
+    return new Date(datestring)
+}
+
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
     const cm = useRef(null);
@@ -36,6 +40,11 @@ export default function PatientTimeline() {
     }, [data])
 
     console.log('data', data)
+
+    if (!data) {
+        return null
+    }
+    console.log('get Date example', getDate(data.cm[0].rx_start_date))
     return (
         <>
         <h1>Concomitant Medications</h1>
