@@ -15,30 +15,33 @@ const height = 500
 //     bottom: 20
 // }
 
-const videoData = [25, 30, 45, 60, 20]
-
 export default function PatientTimeline() {
-    const [data, setData] = useState(null) 
-    const cm = useRef(null)
-
+    const [data, setData] = useState([25, 30, 45, 60, 20, 65, 75]);
+    const cm = useRef(null);
+    
     useEffect(() => {
-        setData(testData.cm)
+        // setData(testData.cm)
 
-        const svg = d3.select(cm.current)
+        // if (data) {
+            const svg = d3.select(cm.current)
 
-    }, [])
+            const xScale = d3.scaleLinear().domain([0, data.length - 1]).range([0, 1000])
+            const xAxis = d3.axisBottom(xScale);
+    
+            svg.select(".x-axis").call(xAxis)
+        // }
+
+
+
+    }, [data])
 
     console.log('data', data)
     return (
         <>
         <h1>Cocomitant Medications</h1>
-        <svg height="300" width="1000">
-        <rect width="100%" height="100%" fill="grey" />
-        {
-            videoData.map(value => (
-                <circle r={value}></circle>
-            ))
-        }
+        <svg ref={cm} height={height} width={width}>
+            <rect width="100%" height="100%" fill="grey" />
+            <g className='x-axis' />
         </svg>
         </>
     )
