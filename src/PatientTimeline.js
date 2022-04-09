@@ -37,11 +37,11 @@ export default function PatientTimeline() {
 
         if (Array.isArray(data)) {
             console.log('array value', data[0].rx_start_date)
-            const minDate = d3.min(data, rx_start_date => {
-                getDate(rx_start_date)
+            const minDate = d3.min(data, dose => {
+                return getDate(dose.rx_start_date)
             })
 
-            console.log('minDate', minDate)
+            console.log('min Date', minDate)
         }
 
 

@@ -50,8 +50,8 @@ function App() {
   console.log('xScale', xScale(data.Population))
 
   return (
-    <Timeline />
-    // <PatientTimeline />
+    // <Timeline />
+    <PatientTimeline />
 
     // <svg width={width} height={height}>
     //   <g className='tick' transform={`translate(${margin.left}, ${margin.top})`}>
