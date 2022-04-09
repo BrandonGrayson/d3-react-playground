@@ -15,9 +15,9 @@ const height = 500
 //     bottom: 20
 // }
 
-// const getDate = datestring => {
-//     return new Date(datestring)
-// }
+const getDate = datestring => {
+    return new Date(datestring)
+}
 
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
@@ -35,8 +35,13 @@ export default function PatientTimeline() {
             svg.select(".x-axis").call(xAxis)
         }
 
-        if ( Array.isArray(data)) {
-            console.log('array value', data[0])
+        if (Array.isArray(data)) {
+            console.log('array value', data[0].rx_start_date)
+            const minDate = d3.min(data, rx_start_date => {
+                getDate(rx_start_date)
+            })
+
+            console.log('minDate', minDate)
         }
 
 

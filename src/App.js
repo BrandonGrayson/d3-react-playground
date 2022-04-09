@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import { csv, scaleBand, scaleLinear, max } from 'd3';
 import PatientTimeline from './PatientTimeline';
+import Timeline from './Timeline';
 
 const csvUrl =
   'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
@@ -49,7 +50,8 @@ function App() {
   console.log('xScale', xScale(data.Population))
 
   return (
-    <PatientTimeline />
+    <Timeline />
+    // <PatientTimeline />
 
     // <svg width={width} height={height}>
     //   <g className='tick' transform={`translate(${margin.left}, ${margin.top})`}>
