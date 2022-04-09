@@ -42,7 +42,7 @@ export default function PatientTimeline() {
             })
 
             const maxDate = d3.max(data, dose => {
-                return dose.rx_start_date
+                return getDate(dose.rx_start_date)
             })
 
             console.log('maxDate', maxDate)
