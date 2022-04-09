@@ -6,6 +6,7 @@ import React, {
 import * as d3 from 'd3';
 import testData from './testData';
 import useResizeObserver from './useResizeObserver';
+import { svg } from 'd3';
 
 const width = 1000
 const height = 500
@@ -29,15 +30,17 @@ export default function PatientTimeline() {
     
     useEffect(() => {
         setData(testData.cm)
+        const svg = d3.select(cm.current)
+        if (!dimensions) return;
 
-        if (data) {
-            const svg = d3.select(cm.current)
+        // if (data) {
+        //     const svg = d3.select(cm.current)
 
-            const xScale = d3.scaleLinear().domain([0, data.length - 1]).range([0, 1000])
-            const xAxis = d3.axisBottom(xScale);
+        //     const xScale = d3.scaleLinear().domain([0, data.length - 1]).range([0, 1000])
+        //     const xAxis = d3.axisBottom(xScale);
     
-            svg.select(".x-axis").call(xAxis)
-        }
+        //     svg.select(".x-axis").call(xAxis)
+        // }
 
         if (Array.isArray(data)) {
             console.log('array value', data[0].rx_start_date)
@@ -50,6 +53,8 @@ export default function PatientTimeline() {
             })
 
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
+            const xAxis = d3.axisBottom(xScale)
+            svg.select(".x-axis").call(xAxis)
         }
 
 
