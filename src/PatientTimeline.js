@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import * as d3 from 'd3';
 import testData from './testData';
+import useResizeObserver from './useResizeObserver';
 
 const width = 1000
 const height = 500
@@ -21,6 +22,9 @@ const getDate = datestring => {
 
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
+    const wrapperRef = useRef()
+    const dimensions = useResizeObserver(wrapperRef)
+
     const cm = useRef(null);
     
     useEffect(() => {
@@ -45,12 +49,12 @@ export default function PatientTimeline() {
                 return getDate(dose.rx_start_date)
             })
 
-            console.log('maxDate', maxDate)
+            const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
         }
 
 
 
-    }, [data])
+    }, [data, dimensions])
 
     console.log('data', data)
 
@@ -61,10 +65,13 @@ export default function PatientTimeline() {
     return (
         <>
         <h1>Concomitant Medications</h1>
+        <div ref={wrapperRef}>
         <svg ref={cm} height={height} width={width}>
             <rect width="100%" height="100%" fill="grey" />
             <g className='x-axis' />
         </svg>
+        </div>
+
         </>
     )
 }
