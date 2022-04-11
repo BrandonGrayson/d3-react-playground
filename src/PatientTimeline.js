@@ -24,13 +24,13 @@ const getDate = datestring => {
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
     const wrapperRef = useRef()
-    const cm = useRef(null);
+    const svgRef = useRef(null);
 
     const dimensions = useResizeObserver(wrapperRef)
 
     useEffect(() => {
         setData(testData.cm)
-        const svg = d3.select(cm.current)
+        const svg = d3.select(svgRef.current)
 
         if (!dimensions) return;
 
@@ -47,9 +47,8 @@ export default function PatientTimeline() {
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
             const xAxis = d3.axisBottom(xScale)
             svg.select(".x-axis")
-            .style("transform", `translateY(${dimensions.height}px)`)
+            .style("transform", `translateY(${450}px)`)
             .call(xAxis)
-
         }
 
     }, [data, dimensions])
@@ -59,8 +58,8 @@ export default function PatientTimeline() {
     return (
         <>
         <h1>Concomitant Medications</h1>
-        <div width={width} height={height} ref={wrapperRef}>
-        <svg ref={cm} height={height} width={width}>
+        <div ref={wrapperRef} >
+        <svg ref={svgRef} height={height} width={width}>
             <rect width="100%" height="100%" fill="grey" />
             <g className='x-axis' />
         </svg>
