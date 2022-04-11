@@ -28,12 +28,22 @@ export default function PatientTimeline() {
 
     const dimensions = useResizeObserver(wrapperRef)
 
+    const rectSize = 30;
+
+    const heatmapDimensions = {
+        width: width,
+        height: height,
+        margin: {top: 130, left: 50, bottom: 70, right: 50}
+    }
+
     useEffect(() => {
         setData(testData.cm)
         const svg = d3.select(svgRef.current)
 
         if (!dimensions) return;
 
+
+        // x axis
         if (Array.isArray(data)) {
             console.log('array value', data[0].rx_start_date)
             const minDate = d3.min(data, dose => {
@@ -51,6 +61,13 @@ export default function PatientTimeline() {
             .call(xAxis)
         }
 
+        // Draw Blocks
+        data.forEach((diagnosis, i) => {
+            svg
+             .append('g')
+             .selectAll('rect')
+        })
+
     }, [data, dimensions])
 
     console.log('data', data)
@@ -60,7 +77,7 @@ export default function PatientTimeline() {
         <h1>Concomitant Medications</h1>
         <div ref={wrapperRef} >
         <svg ref={svgRef} height={height} width={width}>
-            <rect width="100%" height="100%" fill="grey" />
+            {/* <rect width="100%" height="100%" fill="grey" /> */}
             <g className='x-axis' />
         </svg>
         </div>
