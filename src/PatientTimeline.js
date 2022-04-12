@@ -33,7 +33,23 @@ export default function PatientTimeline() {
     const heatmapDimensions = {
         width: width,
         height: height,
-        margin: {top: 130, left: 50, bottom: 70, right: 50}
+        margin: { top: 130, left: 50, bottom: 70, right: 50 }
+    }
+
+    const colors = [
+        {range: 1, color: '#42bcf5'},
+        {range: 2, color: '#42f593'},
+        {range: 3, color: '#f59342'},
+        {range: 4, color: '#f54542'},
+        {range: 5, color: '#5742f5'}
+    ]
+
+    function colorAssign(color) {
+        if (color === 1) return '#42bcf5'
+        else if (color === 2) return '#42f593'
+        else if (color === 3) return '#f59342'
+        else if (color === 4) return '#f54542'
+        else return '#5742f5'
     }
 
     useEffect(() => {
@@ -57,30 +73,40 @@ export default function PatientTimeline() {
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
             const xAxis = d3.axisBottom(xScale)
             svg.select(".x-axis")
-            .style("transform", `translateY(${450}px)`)
-            .call(xAxis)
+                .style("transform", `translateY(${450}px)`)
+                .call(xAxis)
+
+
+            // Draw Blocks
+            data.forEach((diagnosis, i) => {
+                svg
+                    .append('g')
+                    .selectAll('rect')
+                    .data(diagnosis)
+                    .join('rect')
+                    .attr('x', xScale(i) + heatmapDimensions.margin.left)
+                    .attr('y', (d,j) => j * (rectSize + 2) + heatmapDimensions.margin.top)
+                    .attr('width', rectSize)
+                    .attr('height', rectSize)
+                    .attr('fill', d => )
+            })
         }
 
-        // Draw Blocks
-        data.forEach((diagnosis, i) => {
-            svg
-             .append('g')
-             .selectAll('rect')
-        })
 
-    }, [data, dimensions])
+
+    }, [data, dimensions, heatmapDimensions])
 
     console.log('data', data)
-    
+
     return (
         <>
-        <h1>Concomitant Medications</h1>
-        <div ref={wrapperRef} >
-        <svg ref={svgRef} height={height} width={width}>
-            {/* <rect width="100%" height="100%" fill="grey" /> */}
-            <g className='x-axis' />
-        </svg>
-        </div>
+            <h1>Concomitant Medications</h1>
+            <div ref={wrapperRef} >
+                <svg ref={svgRef} height={height} width={width}>
+                    {/* <rect width="100%" height="100%" fill="grey" /> */}
+                    <g className='x-axis' />
+                </svg>
+            </div>
 
         </>
     )
