@@ -30,11 +30,7 @@ export default function PatientTimeline() {
 
     const rectSize = 30;
 
-    const heatmapDimensions = {
-        width: width,
-        height: height,
-        margin: { top: 130, left: 50, bottom: 70, right: 50 }
-    }
+
 
     const colors = [
         {range: 1, color: '#42bcf5'},
@@ -59,6 +55,12 @@ export default function PatientTimeline() {
         if (!dimensions) return;
 
 
+        const heatmapDimensions = {
+            width: width,
+            height: height,
+            margin: { top: 130, left: 50, bottom: 70, right: 50 }
+        }
+
         // x axis
         if (Array.isArray(data)) {
             console.log('array value', data[0].rx_start_date)
@@ -79,22 +81,24 @@ export default function PatientTimeline() {
 
             // Draw Blocks
             data.forEach((diagnosis, i) => {
+
+                console.log('diagnosis', diagnosis)
                 svg
                     .append('g')
                     .selectAll('rect')
-                    .data(diagnosis)
+                    .data(diagnosis.dose)
                     .join('rect')
-                    .attr('x', xScale(i) + heatmapDimensions.margin.left)
-                    .attr('y', (d,j) => j * (rectSize + 2) + heatmapDimensions.margin.top)
+                    // .attr('x', xScale())
+                    // .attr('y',(rectSize + 2))
                     .attr('width', rectSize)
                     .attr('height', rectSize)
-                    .attr('fill', d => )
+                    .attr('fill', color => colorAssign(color))
             })
         }
 
 
 
-    }, [data, dimensions, heatmapDimensions])
+    }, [data, dimensions])
 
     console.log('data', data)
 
