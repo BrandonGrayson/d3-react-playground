@@ -17,9 +17,39 @@ const height = 500
 //     bottom: 20
 // }
 
-const getDate = datestring => {
-    return new Date(datestring)
+
+const heatmapDimensions = {
+    width: width,
+    height: height,
+    margin: { top: 130, left: 50, bottom: 70, right: 50 }
 }
+
+const rectSize = 30;
+
+const colors = [
+    {range: 1, color: '#42bcf5'},
+    {range: 2, color: '#42f593'},
+    {range: 3, color: '#f59342'},
+    {range: 4, color: '#f54542'},
+    {range: 5, color: '#5742f5'}
+]
+
+function colorAssign(color) {
+    if (color === 1) return '#42bcf5'
+    else if (color === 2) return '#42f593'
+    else if (color === 3) return '#f59342'
+    else if (color === 4) return '#f54542'
+    else return '#5742f5'
+}
+
+// const getDate = datestring => {
+//     return new Date(datestring)
+// }
+
+const getDate = dateString => {
+    const date = dateString.split("-");
+    return new Date(date[2], date[0] - 1, date[1]);
+  };
 
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
@@ -28,42 +58,18 @@ export default function PatientTimeline() {
 
     const dimensions = useResizeObserver(wrapperRef)
 
-    const rectSize = 30;
-
-
-
-    const colors = [
-        {range: 1, color: '#42bcf5'},
-        {range: 2, color: '#42f593'},
-        {range: 3, color: '#f59342'},
-        {range: 4, color: '#f54542'},
-        {range: 5, color: '#5742f5'}
-    ]
-
-    function colorAssign(color) {
-        if (color === 1) return '#42bcf5'
-        else if (color === 2) return '#42f593'
-        else if (color === 3) return '#f59342'
-        else if (color === 4) return '#f54542'
-        else return '#5742f5'
-    }
-
     useEffect(() => {
         setData(testData.cm)
         const svg = d3.select(svgRef.current)
 
         if (!dimensions) return;
 
-        const heatmapDimensions = {
-            width: width,
-            height: height,
-            margin: { top: 130, left: 50, bottom: 70, right: 50 }
-        }
-
         // x axis
         if (Array.isArray(data)) {
+
             console.log('array value', data[0].rx_start_date)
             const minDate = d3.min(data, dose => {
+                console.log('date', getDate(dose.rx_start_date))
                 return getDate(dose.rx_start_date)
             })
 
@@ -73,6 +79,8 @@ export default function PatientTimeline() {
 
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
 
+            console.log('min Date', minDate)
+            console.log('max Date', maxDate)
             svg
              .selectAll(".dose")
              .data(data)
@@ -80,10 +88,8 @@ export default function PatientTimeline() {
              .attr("class", "dose")
              .attr('stroke', 'black')
              .attr('x1', dose => {
-                 console.log('data inside attr', data)
-                 console.log('dose inside attr', dose)
-                 console.log('xScale attr', xScale(getDate(dose.rx_start_date)))
-                })
+                 console.log('xScale start attr', xScale(getDate(dose.rx_start_date)))
+            })
              .attr('y1', 450)
              .attr('x2', dose => xScale(getDate(dose.rx_start_date)))
              .attr('y2', 0)
