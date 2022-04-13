@@ -54,7 +54,6 @@ export default function PatientTimeline() {
 
         if (!dimensions) return;
 
-
         const heatmapDimensions = {
             width: width,
             height: height,
@@ -73,31 +72,44 @@ export default function PatientTimeline() {
             })
 
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
+
+            svg
+             .selectAll(".dose")
+             .data(data)
+             .join("line")
+             .attr("class", "dose")
+             .attr('stroke', 'black')
+             .attr('x1', dose => {
+                 console.log('data inside attr', data)
+                 console.log('dose inside attr', dose)
+                 console.log('xScale attr', xScale(getDate(dose.rx_start_date)))
+                })
+             .attr('y1', 450)
+             .attr('x2', dose => xScale(getDate(dose.rx_start_date)))
+             .attr('y2', 0)
+
             const xAxis = d3.axisBottom(xScale)
+
             svg.select(".x-axis")
                 .style("transform", `translateY(${450}px)`)
                 .call(xAxis)
 
-
             // Draw Blocks
-            data.forEach((diagnosis, i) => {
+            // data.forEach((diagnosis, i) => {
 
-                console.log('diagnosis', diagnosis)
-                svg
-                    .append('g')
-                    .selectAll('rect')
-                    .data(diagnosis.dose)
-                    .join('rect')
-                    // .attr('x', xScale())
-                    // .attr('y',(rectSize + 2))
-                    .attr('width', rectSize)
-                    .attr('height', rectSize)
-                    .attr('fill', color => colorAssign(color))
-            })
+            //     console.log('diagnosis', diagnosis)
+            //     svg
+            //         .append('g')
+            //         .selectAll('rect')
+            //         .data(diagnosis.dose)
+            //         .join('rect')
+            //         // .attr('x', xScale())
+            //         // .attr('y',(rectSize + 2))
+            //         .attr('width', rectSize)
+            //         .attr('height', rectSize)
+            //         .attr('fill', color => colorAssign(color))
+            // })
         }
-
-
-
     }, [data, dimensions])
 
     console.log('data', data)
