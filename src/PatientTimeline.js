@@ -8,8 +8,8 @@ import testData from './testData';
 import useResizeObserver from './useResizeObserver';
 import { svg } from 'd3';
 
-const width = 1500
-const height = 500
+// const width = 1500
+// const height = 500
 // const margin = {
 //     top: 20,
 //     right: 40,
@@ -18,11 +18,11 @@ const height = 500
 // }
 
 
-const heatmapDimensions = {
-    width: width,
-    height: height,
-    margin: { top: 130, left: 50, bottom: 70, right: 50 }
-}
+// const heatmapDimensions = {
+//     width: width,
+//     height: height,
+//     margin: { top: 130, left: 50, bottom: 70, right: 50 }
+// }
 
 const rectSize = 30;
 
@@ -115,8 +115,8 @@ export default function PatientTimeline() {
     return (
         <>
             <h1>Concomitant Medications</h1>
-            <div ref={wrapperRef} >
-                <svg ref={svgRef} height={height} width={width}>
+            <div ref={wrapperRef}>
+                <svg ref={svgRef} >
                     {/* <rect width="100%" height="100%" fill="grey" /> */}
                     <g className='x-axis' />
                 </svg>
