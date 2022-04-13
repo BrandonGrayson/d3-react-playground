@@ -67,9 +67,7 @@ export default function PatientTimeline() {
         // x axis
         if (Array.isArray(data)) {
 
-            console.log('array value', data[0].rx_start_date)
             const minDate = d3.min(data, dose => {
-                console.log('date', getDate(dose.rx_start_date))
                 return getDate(dose.rx_start_date)
             })
 
@@ -79,17 +77,13 @@ export default function PatientTimeline() {
 
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
 
-            console.log('min Date', minDate)
-            console.log('max Date', maxDate)
             svg
              .selectAll(".dose")
              .data(data)
              .join("line")
              .attr("class", "dose")
              .attr('stroke', 'black')
-             .attr('x1', dose => {
-                 console.log('xScale start attr', xScale(getDate(dose.rx_start_date)))
-            })
+             .attr('x1', dose => xScale(getDate(dose.rx_start_date)))
              .attr('y1', 450)
              .attr('x2', dose => xScale(getDate(dose.rx_start_date)))
              .attr('y2', 0)
@@ -117,8 +111,6 @@ export default function PatientTimeline() {
             // })
         }
     }, [data, dimensions])
-
-    console.log('data', data)
 
     return (
         <>
