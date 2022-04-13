@@ -27,11 +27,11 @@ import { svg } from 'd3';
 const rectSize = 30;
 
 const colors = [
-    {range: 1, color: '#42bcf5'},
-    {range: 2, color: '#42f593'},
-    {range: 3, color: '#f59342'},
-    {range: 4, color: '#f54542'},
-    {range: 5, color: '#5742f5'}
+    { range: 1, color: '#42bcf5' },
+    { range: 2, color: '#42f593' },
+    { range: 3, color: '#f59342' },
+    { range: 4, color: '#f54542' },
+    { range: 5, color: '#5742f5' }
 ]
 
 function colorAssign(color) {
@@ -49,7 +49,7 @@ function colorAssign(color) {
 const getDate = dateString => {
     const date = dateString.split("-");
     return new Date(date[2], date[0] - 1, date[1]);
-  };
+};
 
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
@@ -77,38 +77,49 @@ export default function PatientTimeline() {
 
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
 
-            svg
-             .selectAll(".dose")
-             .data(data)
-             .join("line")
-             .attr("class", "dose")
-             .attr('stroke', 'black')
-             .attr('x1', dose => xScale(getDate(dose.rx_start_date)))
-             .attr('y1', 450)
-             .attr('x2', dose => xScale(getDate(dose.rx_start_date)))
-             .attr('y2', 0)
+            // line creation
+            // svg
+            //  .selectAll(".dose")
+            //  .data(data)
+            //  .join("line")
+            //  .attr("class", "dose")
+            //  .attr('stroke', 'black')
+            //  .attr('x1', dose => xScale(getDate(dose.rx_start_date)))
+            //  .attr('y1', 450)
+            //  .attr('x2', dose => xScale(getDate(dose.rx_start_date)))
+            //  .attr('y2', 0)
+
+            // Draw Blocks
+            data.forEach((diagnosis, i) => {
+
+                console.log('diagnosis', diagnosis)
+                svg
+                    .selectAll(".dose")
+                    .data(data)
+                    .join('rect')
+                    .attr('class', 'dose')
+                    .attr('x', dose => xScale(getDate(dose.rx_start_date)))
+                    .attr('y', 420)
+                    .attr('width', rectSize)
+                    .attr('height', rectSize)
+                    .attr('fill', color => colorAssign(color.dose))
+                    
+                    // .append('g')
+                    // .selectAll('rect')
+                    // .data(data)
+                    // .join('rect')
+                    // .attr('x', dose => xScale(getDate(dose.rx_start_date)))
+                    // // .attr('y', 100)
+                    // .attr('width', rectSize)
+                    // .attr('height', rectSize)
+                    // .attr('fill', color => colorAssign(color.dose))
+            })
 
             const xAxis = d3.axisBottom(xScale)
 
             svg.select(".x-axis")
                 .style("transform", `translateY(${450}px)`)
                 .call(xAxis)
-
-            // Draw Blocks
-            // data.forEach((diagnosis, i) => {
-
-            //     console.log('diagnosis', diagnosis)
-            //     svg
-            //         .append('g')
-            //         .selectAll('rect')
-            //         .data(diagnosis.dose)
-            //         .join('rect')
-            //         // .attr('x', xScale())
-            //         // .attr('y',(rectSize + 2))
-            //         .attr('width', rectSize)
-            //         .attr('height', rectSize)
-            //         .attr('fill', color => colorAssign(color))
-            // })
         }
     }, [data, dimensions])
 
