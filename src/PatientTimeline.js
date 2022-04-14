@@ -128,6 +128,7 @@ export default function PatientTimeline() {
     return (
         <>
             <h1>Concomitant Medications</h1>
+ 
             <div ref={wrapperRef}>
                 <svg ref={svgRef} >
                     {/* <rect width="100%" height="100%" fill="grey" /> */}
@@ -135,6 +136,15 @@ export default function PatientTimeline() {
                 </svg>
             </div>
 
+            <h2>Dose breakdown</h2>
+            <ul>
+                <li>blue: 1 '#42bcf5'</li>
+                <li>green: 2 '#42f593'</li>
+                <li>orange: 3 '#f59342'</li>
+                <li>red: 4 '#f54542'</li>
+                <li>purple: 5 '#5742f5'</li>
+                
+            </ul>
         </>
     )
 }
