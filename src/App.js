@@ -6,7 +6,7 @@ import { csv, scaleBand, scaleLinear, max } from 'd3';
 import PatientTimeline from './PatientTimeline';
 import Timeline from './Timeline';
 import "./App.css";
-
+import Name from './Name';
 const csvUrl =
   'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
 
@@ -53,7 +53,9 @@ function App() {
   return (
     <>
       {/* <Timeline /> */}
-      <PatientTimeline />
+      {/* <PatientTimeline /> */}
+      <Name />
+
     </>
 
 

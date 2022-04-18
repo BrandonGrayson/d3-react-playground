@@ -6,7 +6,7 @@ import React, {
 import * as d3 from 'd3';
 import testData from './testData';
 import useResizeObserver from './useResizeObserver';
-import { svg } from 'd3';
+
 
 // const width = 1500
 // const height = 500
@@ -106,16 +106,29 @@ export default function PatientTimeline() {
                         return colorAssign(parseInt(color.dose))
                     })
 
-            // .append('g')
-            // .selectAll('rect')
-            // .data(data)
-            // .join('rect')
-            // .attr('x', dose => xScale(getDate(dose.rx_start_date)))
-            // // .attr('y', 100)
-            // .attr('width', rectSize)
-            // .attr('height', rectSize)
-            // .attr('fill', color => colorAssign(color.dose))
-            // })
+            // append the type of medications
+
+            svg
+                .append('g')
+                .selectAll('h3')
+                .data(data)
+                .enter()
+                .append('h3')
+                .text('hello')
+
+            svg
+            .select("section")
+            .selectAll("p")
+            .data([1, 2 ,3])
+            .enter()
+            .append("p")
+            .text('hello')
+
+                
+
+
+
+            
 
             const xAxis = d3.axisBottom(xScale)
 
@@ -133,18 +146,19 @@ export default function PatientTimeline() {
                 <svg ref={svgRef} >
                     {/* <rect width="100%" height="100%" fill="grey" /> */}
                     <g className='x-axis' />
+                    <g className='name' />
                 </svg>
             </div>
 
             <h2>Dose breakdown</h2>
             <ul>
-                <li>blue: 1 '#42bcf5'</li>
-                <li>green: 2 '#42f593'</li>
-                <li>orange: 3 '#f59342'</li>
-                <li>red: 4 '#f54542'</li>
-                <li>purple: 5 '#5742f5'</li>
-                
+                <li>blue: 1 </li>
+                <li>green: 2 </li>
+                <li>orange: 3 </li>
+                <li>red: 4 </li>
+                <li>purple: 5</li>
             </ul>
+            <section></section>
         </>
     )
 }
