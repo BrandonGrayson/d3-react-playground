@@ -8,6 +8,7 @@ import testData from './testData';
 import useResizeObserver from './useResizeObserver';
 
 
+
 // const width = 1500
 // const height = 500
 // const margin = {
@@ -53,6 +54,7 @@ const getDate = dateString => {
 
 export default function PatientTimeline() {
     const [data, setData] = useState(null);
+    const [omData, setOmData] = useState(null)
     const wrapperRef = useRef()
     const svgRef = useRef(null);
 
@@ -60,6 +62,7 @@ export default function PatientTimeline() {
 
     useEffect(() => {
         setData(testData.cm)
+        setOmData(testData.mh)
         const svg = d3.select(svgRef.current)
 
         if (!dimensions) return;
@@ -77,22 +80,6 @@ export default function PatientTimeline() {
 
             const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, dimensions.width])
 
-            // line creation
-            // svg
-            //     .selectAll(".dose")
-            //     .data(data, data => data.dose)
-            //     .join("line")
-            //     .attr("class", "dose")
-            //     .attr('stroke', 'black')
-            //     .attr('x1', dose => xScale(getDate(dose.rx_start_date)))
-            //     .attr('y1', 450)
-            //     .attr('x2', dose => xScale(getDate(dose.rx_start_date)))
-            //     .attr('y2', 0)
-
-            // Draw Blocks
-            // data.forEach((diagnosis, i) => {
-
-            //     console.log('diagnosis', diagnosis)
                 svg
                     .selectAll(".dose")
                     .data(data)
@@ -106,29 +93,27 @@ export default function PatientTimeline() {
                         return colorAssign(parseInt(color.dose))
                     })
 
+                    // end dates
+                svg
+                    .selectAll(".end")
+                    .data(data)
+                    .join('rect')
+                    .attr('class', 'end')
+                    .attr('x', data => xScale(getDate(data.rx_end_date)))
+                    .attr('y', 420)
+                    .attr('width', rectSize)
+                    .attr('height', rectSize)
+                    .attr('fill', color => {
+                        return colorAssign(parseInt(color.dose))
+                    })
+
+                // adding om medications
+                // svg
+                //  .selectAll(".om")
+                //  .data(d)
+
+
             // append the type of medications
-
-            svg
-                .append('g')
-                .selectAll('h3')
-                .data(data)
-                .enter()
-                .append('h3')
-                .text('hello')
-
-            svg
-            .select("section")
-            .selectAll("p")
-            .data([1, 2 ,3])
-            .enter()
-            .append("p")
-            .text('hello')
-
-                
-
-
-
-            
 
             const xAxis = d3.axisBottom(xScale)
 
@@ -137,6 +122,10 @@ export default function PatientTimeline() {
                 .call(xAxis)
         }
     }, [data, dimensions])
+
+    // if (data === null) {
+    //     return null
+    // }
 
     return (
         <>

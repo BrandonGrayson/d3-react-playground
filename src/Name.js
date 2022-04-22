@@ -12,30 +12,30 @@ export default function Name() {
 
     useEffect(() => {
         const svg = d3.select(svgRef.current)
-        // svg
-        //     .selectAll('text')
-        //     .data([1, 2, 3])
-        //     .enter()
-        //     .append('text')
-        //     .text(data => data)
-        //     .attr('fontFamily', '30px')
-
-        d3
-        .select('div')
-        .selectAll('p')
-        .data([1, 2, 3])
-        .enter()
-        .append('p')
-        .text(data => data)
-
-
+        svg
+            .selectAll("p")
+            .data([1, 2, 3])
+            .enter()
+            .append("p")
+            .text(data => data)
+        
+        // d3
+        // .select('div')
+        // .selectAll('p')
+        // .data([1, 2, 3])
+        // .enter()
+        // .append('p')
+        // .text(data => data)
     })
 
     return (
         <>
-            <svg ref={svgRef}>
+            {/* <svg ref={svgRef}>
             
-
+           
+            </svg> */}
+            <svg width="400" height="60">
+                <text x="260" y="25" fontSize="20px" fill="orange" textAnchor="end">Hello World</text>
             </svg>
             <div></div>
         </>
