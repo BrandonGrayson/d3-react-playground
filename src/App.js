@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import { csv, scaleBand, scaleLinear, max } from 'd3';
 import PatientTimeline from './PatientTimeline';
+import MedTimeline from './MedTimeline';
 import Timeline from './Timeline';
 import "./App.css";
 import Name from './Name';
@@ -56,6 +57,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PatientTimeline />} />
       <Route path="/name" element={<Name /> }/>
+      <Route path="/medTimeline" element={<MedTimeline />} />
       <Route />
     </Routes>
 </Router>
