@@ -15,6 +15,11 @@ const getDate = dateString => {
     return new Date(date[2], date[0] - 1, date[1]);
 };
 
+const dimensions = {
+    right: 200, 
+    left: 200
+}
+
 export default function MedTimeline() {
     const [data, setData] = useState(testData.cm)
     const svgRef = useRef()
@@ -33,7 +38,7 @@ export default function MedTimeline() {
     
        const svg = d3.select(svgRef.current)
 
-       const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, svgWidth])
+       const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0 + dimensions.left, svgWidth - dimensions.right])
 
        const xAxis = d3.axisBottom(xScale)
 
