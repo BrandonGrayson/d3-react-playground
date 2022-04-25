@@ -55,6 +55,7 @@ function App() {
 <Router>
     <Routes>
       <Route path="/" element={<PatientTimeline />} />
+      <Route path="/name" element={<Name /> }/>
       <Route />
     </Routes>
 </Router>
