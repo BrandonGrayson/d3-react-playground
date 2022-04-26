@@ -36,22 +36,24 @@ export default function MedTimeline() {
 
     useEffect(() => {
     
+        // x axis
        const svg = d3.select(svgRef.current)
 
-       const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0 + dimensions.left, svgWidth - dimensions.right])
+       const xScale = d3.scaleTime().domain([minDate, maxDate]).range([0 + dimensions.left, svgWidth])
 
        const xAxis = d3.axisBottom(xScale)
 
         svg.select(".x-axis").style("transform", `translateY(${450}px)`).call(xAxis)
 
+        // y axis
+        const YScale = d3.scaleBand().domain(["OM", "OE"]).range([400, 100])
 
-        // const YScale = d3.scaleLinear().domain([0, testData.length]).range([0, svgHeight])
+        const yAxis = d3.axisLeft(YScale)
 
-        // const yAxis = d3.axisLeft(YScale)
+        svg.select(".y-axis").style("transform", `translateX(180px)`).call(yAxis)
 
-        // svg.select(".y-axis").call(yAxis)
-
-
+        // first meds line
+        // svg.selectAll()
 
     }, [])
 
@@ -60,6 +62,7 @@ export default function MedTimeline() {
         <svg ref={svgRef} width={svgWidth} height={svgHeight}>
             <g className="x-axis" />
             <g className="y-axis" />
+            <g className="oeMeds" />
         </svg>
        
 
