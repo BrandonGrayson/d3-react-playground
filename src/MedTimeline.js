@@ -53,8 +53,16 @@ export default function MedTimeline() {
         svg.select(".y-axis").style("transform", `translateX(180px)`).call(yAxis)
 
         // first meds line
-        // svg.selectAll()
-
+        svg
+         .selectAll(".med")
+         .data(data)
+         .join('line')
+         .attr('class', 'med')
+         .attr("stroke", "black")
+         .attr('x1', data => xScale(getDate(data.rx_start_date)))
+         .attr("y1", 20 + 10)
+         .attr('x2', data => xScale(getDate(data.rx_end_date)))
+         .attr('y2', 20 + 10)
     }, [])
 
     return (
@@ -62,7 +70,6 @@ export default function MedTimeline() {
         <svg ref={svgRef} width={svgWidth} height={svgHeight}>
             <g className="x-axis" />
             <g className="y-axis" />
-            <g className="oeMeds" />
         </svg>
        
 
