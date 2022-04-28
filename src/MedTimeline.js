@@ -10,6 +10,16 @@ import useResizeObserver from './useResizeObserver';
 const svgWidth = 1600
 const svgHeight = 600
 
+var barHeight = 20;
+var gap = barHeight + 4;
+var topPadding = 75;
+var sidePadding = 75;
+
+var colorScale = d3.scale.linear()
+    .domain([0, 1])
+    .range(["#00B9FA", "#F95002"])
+    .interpolate(d3.interpolateHcl);
+
 const getDate = dateString => {
     const date = dateString.split("-");
     return new Date(date[2], date[0] - 1, date[1]);
