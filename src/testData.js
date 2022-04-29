@@ -187,7 +187,8 @@ const testData = {
         "assoc_mh_cause(*mh)": null,
         "assoc_mh_treat(*mh)": "Hepatitis B",
         "assoc_med_cause": null,
-        "assoc_oncmed_prophy(*oh)": null
+        "assoc_oncmed_prophy(*oh)": null,
+        "type": "Development"
       },
       {
         "orderid": "12",
@@ -215,7 +216,8 @@ const testData = {
         "assoc_mh_cause(*mh)": null,
         "assoc_mh_treat(*mh)": null,
         "assoc_med_cause": "sorafenib",
-        "assoc_oncmed_prophy(*oh)": null
+        "assoc_oncmed_prophy(*oh)": null, 
+        "type": "coding"
       },
       {
         "orderid": "12",
@@ -243,7 +245,8 @@ const testData = {
         "assoc_mh_cause(*mh)": null,
         "assoc_mh_treat(*mh)": null,
         "assoc_med_cause": "sorafenib",
-        "assoc_oncmed_prophy(*oh)": null
+        "assoc_oncmed_prophy(*oh)": null,
+        "type": "promotion"
       },
       {
         "orderid": "12",
@@ -271,7 +274,8 @@ const testData = {
         "assoc_mh_cause(*mh)": null,
         "assoc_mh_treat(*mh)": null,
         "assoc_med_cause": "sorafenib",
-        "assoc_oncmed_prophy(*oh)": null
+        "assoc_oncmed_prophy(*oh)": null,
+        "type": "celebration"
       },
       {
         "orderid": "12",
@@ -299,7 +303,8 @@ const testData = {
         "assoc_mh_cause(*mh)": null,
         "assoc_mh_treat(*mh)": null,
         "assoc_med_cause": "sorafenib",
-        "assoc_oncmed_prophy(*oh)": null
+        "assoc_oncmed_prophy(*oh)": null,
+        "type": "celebration"
       }
     ],
     "pr": [
