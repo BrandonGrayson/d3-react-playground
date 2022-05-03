@@ -15,7 +15,7 @@ var gap = barHeight + 4;
 var topPadding = 75;
 var sidePadding = 75;
 
-const yVals = ["OE", "OM"]
+const yVals = ["OM"]
 
 var colorScale = d3.scaleLinear()
     .domain([0, 1])
@@ -67,23 +67,35 @@ export default function MedTimeline() {
 
         // svg.select(".y-axis").style("transform", `translateX(180px)`).call(yAxis)
 
+        // y axis
         svg
-         .append('g')
+        //  .append('g')
+         .select('.y-axis')
          .selectAll('text')
          .data(yVals)
          .join('text')
          .text(data => data)
-         .attr('x', 200)
-         .attr('y', 200)
+         .attr('x', 120)
+         .attr("y", 300)
          .attr("font-size", 20)
 
-        // svg
-        //  .append('g')
-        //  .selectAll('.med')
-        //  .data(data)
-        //  .join('rect')
-        //  .attr('class', 'med')
-        //  .attr('x', data => )
+        // append rectangles
+        svg
+        //  .select(".om")
+         .selectAll('.omMeds')
+         .data(data)
+         .join('rect')
+         .attr('class', 'omMeds')
+         .attr('x', dose => xScale(getDate(dose.rx_start_date)))
+         .attr('y', (data, index) => {
+             return index * gap + topPadding
+         })
+         .attr('width', (data, index) => {
+             return xScale(getDate(data.rx_end_date)) - xScale(getDate(data.rx_start_date))
+         }) 
+         .attr('height', barHeight)
+         .attr("stroke", 'none')
+         .attr('fill', "#42bcf5")
 
     }, [])
 
@@ -92,6 +104,7 @@ export default function MedTimeline() {
         <svg ref={svgRef} width={svgWidth} height={svgHeight}>
             <g className="x-axis" />
             <g className="y-axis" />
+            {/* <g className="om" /> */}
         </svg>
 
 
